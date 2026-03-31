@@ -10,7 +10,7 @@ st.write("Orders that need to be filled.")
 # session = get_active_session()
 
 def create_session():
-    connection_parameters = st.secrets["snowflake"]
+    connection_parameters = st.secrets["connections.snowflake"]
     return Session.builder.configs(connection_parameters).create()
 
 session = create_session()
