@@ -7,7 +7,13 @@ from snowflake.snowpark.functions import col, when_matched
 st.title(":cup_with_straw: Pending Smoothie Orders :cup_with_straw:")
 st.write("Orders that need to be filled.")
 
-session = get_active_session()
+# session = get_active_session()
+
+def create_session():
+    connection_parameters = st.secrets["snowflake"]
+    return Session.builder.configs(connection_parameters).create()
+
+session = create_session()
 
 my_dataframe = session.table("smoothies.public.orders") \
     .filter(col("ORDER_FILLED") == False)
